@@ -11,7 +11,7 @@ export const styles: Styles = {
     },
 
     [theme.fn.largerThan('xs')]: {
-      padding: theme.spacing.md,
+      padding: theme.spacing.xs,
     },
   }),
 };

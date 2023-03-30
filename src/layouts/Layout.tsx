@@ -1,8 +1,5 @@
-import { createStyles, Flex, Text } from '@mantine/core';
-import { IconWalletOff } from '@tabler/icons';
-import { useWeb3React } from '@web3-react/core';
+import { createStyles } from '@mantine/core';
 import { FC, ReactNode } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 
@@ -26,7 +23,6 @@ const useStyles = createStyles((theme) => ({
 export const Layout: FC<LayoutProps> = ({ children }) => {
 
   const { classes } = useStyles();
-
 
   return (
     <div className={classes.container}>
