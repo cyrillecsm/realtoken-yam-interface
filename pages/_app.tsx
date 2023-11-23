@@ -15,6 +15,7 @@ import {
   Web3Providers,
   Websites,
   getConnectors,
+  getReadOnlyConnector,
   getWalletConnectV2,
   gnosisHooks,
   gnosisSafe,
@@ -57,12 +58,14 @@ const [walletConnectV2, walletConnectV2Hooks] = getWalletConnectV2<CustomChain>(
   walletConnectKey,
   showAllNetworks
 );
+const [readOnly, readOnlyHooks] = getReadOnlyConnector(customChains);
 
-const libraryConnectors = getConnectors(
-  [metaMask, metaMaskHooks],
-  [gnosisSafe, gnosisHooks],
-  [walletConnectV2, walletConnectV2Hooks]
-);
+const libraryConnectors = getConnectors({
+  metamask: [metaMask, metaMaskHooks],
+  gnosisSafe: [gnosisSafe, gnosisHooks],
+  walletConnectV2: [walletConnectV2, walletConnectV2Hooks],
+  readOnly: [readOnly, readOnlyHooks],
+});
 
 type AppProps = NextAppProps & { colorScheme: ColorScheme; locale: string };
 
