@@ -29,7 +29,6 @@ import TokenExchange from './components/TokenExchange';
 import { TransactionViewAccordion } from '../components/TransactionListView';
 import 'cleansatmining-simulator/dist/simulator.css';
 import { Simulator, SimulationProductData } from 'cleansatmining-simulator';
-import { ALPHA } from 'src/mocks/products';
 import { SimulatorButton } from '../components/SimulatorButton';
 
 interface FarmOverview {
@@ -152,21 +151,23 @@ const BuyOfferForms: FC<BuyOffertProps> = ({
     account,
   );
 
-  const [productData, setProductData] = useState<SimulationProductData>(ALPHA);
+  const [productData, setProductData] = useState<
+    SimulationProductData | undefined
+  >(undefined);
 
   useEffect(() => {
-    if (setSideElement) {
+    if (setSideElement && productData) {
       setSideElement(
         <div style={{ marginTop: '-20px' }}>
           <Simulator
             amountInvested={getUsdAmount(offer, values)}
             productData={productData}
-            displayLogs={true}
+            displayLogs={false}
           />
         </div>,
       );
     }
-  }, [values]);
+  }, [values, productData]);
 
   useEffect(() => {
     const getOfferTokenInfos = async () => {
@@ -216,9 +217,10 @@ const BuyOfferForms: FC<BuyOffertProps> = ({
             .toNumber(),
           minInvestmentAmount: 0,
         };
+
         setProductData(product);
       } catch (err) {
-        console.error('Failed to fetch API data:', err);
+        console.error('Simulator: Failed to fetch API data:', err);
       }
     };
 
@@ -300,11 +302,9 @@ const BuyOfferForms: FC<BuyOffertProps> = ({
           </Flex>
 
           {(offer.type === OFFER_TYPE.BUY || offer.type === OFFER_TYPE.SELL) &&
-            toggleSide && (
-              <SimulatorButton
-                label={tswap('confirm')}
-                toggle={toggleSide}
-              ></SimulatorButton>
+            toggleSide &&
+            productData !== undefined && (
+              <SimulatorButton toggle={toggleSide}></SimulatorButton>
             )}
           <TransactionViewAccordion
             offerId={offer.offerId}
