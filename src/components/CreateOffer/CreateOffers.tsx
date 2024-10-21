@@ -146,6 +146,7 @@ const useStyles = createStyles((theme) => ({
 export const CreateOffer = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [errorNotification, setErrorNotification] = useState<boolean>(false);
+  const [errorNotificationMsg, setErrorNotificationMsg] = useState<string>('');
 
   const { refreshOffers } = useRefreshOffers(false);
 
@@ -451,6 +452,7 @@ export const CreateOffer = () => {
       console.log('Error when sending createBatch tx: ', err);
       setLoading(false);
       setErrorNotification(true);
+      setErrorNotificationMsg(JSON.stringify(err, null, 2));
     }
   };
 
@@ -486,9 +488,11 @@ export const CreateOffer = () => {
           sx={{ position: 'absolute', bottom: '50vh' }}
           onClose={() => {
             setErrorNotification(() => false);
+            setErrorNotificationMsg('');
           }}
         >
-          {'Error ! Offer(s) not created. Please retry.'}
+          {'Error ! Offer(s) not created. Please retry. Details: ' +
+            errorNotificationMsg}
         </Notification>
       )}
 
