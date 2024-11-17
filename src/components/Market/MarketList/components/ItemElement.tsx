@@ -82,10 +82,19 @@ export const ItemElement: FC<ItemElementProps> = ({ offer, isLastItem }) => {
 
   const handleClickEvent = (event: React.PointerEvent<HTMLDivElement>) => {
     const target: HTMLDivElement = event.target as HTMLDivElement;
+    console.log('click load offer', target.accessKey);
     if (
+      typeof window !== 'undefined' &&
+      offerAction &&
       target.accessKey !== LINK_ACCESS_KEY &&
       target.accessKey !== SPOT_ACCESS_KEY
     ) {
+      window.open(`/offers/${offerAction.offerId}`, '_blank');
+    } else if (
+      target.accessKey !== LINK_ACCESS_KEY &&
+      target.accessKey !== SPOT_ACCESS_KEY
+    ) {
+      console.log('dispatch');
       offerAction
         ? onOpenOffer(offerAction)
         : console.warn('Offer not loaded ' + offer.id);
