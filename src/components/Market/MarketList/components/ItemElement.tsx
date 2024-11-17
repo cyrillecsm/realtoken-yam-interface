@@ -89,7 +89,7 @@ export const ItemElement: FC<ItemElementProps> = ({ offer, isLastItem }) => {
       target.accessKey !== LINK_ACCESS_KEY &&
       target.accessKey !== SPOT_ACCESS_KEY
     ) {
-      window.open(`/offers/${offerAction.offerId}`, '_blank');
+      window.open(`/offers/${offer.id}`, '_blank');
     } else if (
       target.accessKey !== LINK_ACCESS_KEY &&
       target.accessKey !== SPOT_ACCESS_KEY
