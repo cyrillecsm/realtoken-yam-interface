@@ -34,7 +34,8 @@ import { OfferPriceDelta } from './widgets/OfferPriceDelta';
 import { OfferSeller } from './widgets/OfferSeller';
 import { selectedOfferAtom } from 'src/states';
 import { useAtom } from 'jotai';
-
+import { useAppSelector } from 'src/hooks/react-hooks';
+import { selectOffer } from 'src/store/features/interface/interfaceSelector';
 interface ItemElementProps {
   offer: OfferData;
   isLastItem: boolean;
@@ -47,7 +48,8 @@ export const ItemElement: FC<ItemElementProps> = ({ offer, isLastItem }) => {
   const isLarge = isLargeBk ?? true;
   const isMobile = isMobileBk ?? false;
   //const isSmallMobile = useMediaQuery(`(max-width: 300px`);
-  const { offer: offerAction } = useOffer(parseInt(offer.id));
+  //const { offer: offerAction } = useOffer(parseInt(offer.id));
+  const offerAction = useAppSelector((state) => selectOffer(state, offer.id));
   const { t } = useTranslation(offer.type.toLowerCase(), { keyPrefix: 'list' });
   const columnLabels = mapColumnLabels(t);
   //console.log('ITEM OFFER', JSON.stringify(offer, null, 4));
@@ -83,14 +85,14 @@ export const ItemElement: FC<ItemElementProps> = ({ offer, isLastItem }) => {
   const handleClickEvent = (event: React.PointerEvent<HTMLDivElement>) => {
     const target: HTMLDivElement = event.target as HTMLDivElement;
     console.log('click load offer', target.accessKey);
-    if (
+    /* if (
       typeof window !== 'undefined' &&
       offerAction &&
       target.accessKey !== LINK_ACCESS_KEY &&
       target.accessKey !== SPOT_ACCESS_KEY
     ) {
       window.open(`/offers/${offer.id}`, '_blank');
-    } else if (
+    } else */ if (
       target.accessKey !== LINK_ACCESS_KEY &&
       target.accessKey !== SPOT_ACCESS_KEY
     ) {

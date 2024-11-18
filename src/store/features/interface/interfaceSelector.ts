@@ -60,6 +60,13 @@ export const selectPublicOffers = createSelector(
   },
 );
 
+export const selectOffer = (state: RootState, id: string) => {
+  const offers = selectOffers(state);
+  const offersIsLoading = selectOffersIsLoading(state);
+  if (!offers || offersIsLoading) return undefined;
+  return offers.find((offer: Offer) => offer.offerId === id);
+};
+
 export const selectAllOffers = (state: RootState) => {
   const offers = selectOffers(state);
   const offersIsLoading = selectOffersIsLoading(state);
