@@ -29,6 +29,8 @@ const useStyle = createStyles((theme) => ({
     borderBottomColor: 'transparent',
     color: theme.colors.brand,
     textDecoration: 'none',
+    display: 'inline-flex',
+    alignItems: 'center',
     '&:hover': {
       color: theme.colors.brand,
       borderBottomColor: theme.colors.brand,
