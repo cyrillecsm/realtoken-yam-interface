@@ -36,7 +36,8 @@ export const UrlKyc: UrlExternal = {
 
 export const UrlWallet: UrlExternal = {
   name: 'Wallet',
-  url: 'https://marketplace.cleansatmining.com/account/token-address/',
+  url: 'https://docs.google.com/forms/d/e/1FAIpQLScP8VKzQ2J0yVDtHW59ESjhilOWbiYR6z4JIi-xurBKrkLhng/viewform',
+  //url: 'https://marketplace.cleansatmining.com/account/token-address/',
   keyword: 'wallet',
 };
 
